@@ -142,7 +142,7 @@ void controlAllegroHand::init(int mode)
 	ROS_INFO("CAN: Opening device");
 	
 
-	CanHandle = LINUX_CAN_Open("/dev/pcan32", O_RDWR);
+	CanHandle = LINUX_CAN_Open("/dev/pcan0", O_RDWR);
 	if (!CanHandle)
 	{
 		//PRINT_INFO("Error in CAN_Open()");
