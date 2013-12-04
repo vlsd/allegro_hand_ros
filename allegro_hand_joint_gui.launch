@@ -22,12 +22,12 @@
 	<param name="use_gui" value="$(arg gui)"/>
 	
 	<!-- This launch file is set up for ROS FUERTE by default. If you are using GROOVY, please set this param to 'true'.-->
-	<arg name="GROOVY" default="false"/>
+	<arg name="GROOVY" default="true"/>
     
     
+    <remap from="/allegroHand/joint_cmd" to="/joint_states"/>
+
     <node name="allegro_hand" pkg="allegro_hand_core_$(arg CONTROLLER)" type="allegro_hand_core_$(arg CONTROLLER)" output="screen" clear_params="true">
-    	<remap from="/allegroHand/joint_cmd" to="joint_states"/>
-    	
     	<!--parameters are within the scope of the hand node so that multiple hands can be run at the same time -->
 		<rosparam file="parameters/zero.yaml" command="load" />
 		<rosparam file="parameters/gains_pd.yaml" command="load" />
@@ -35,17 +35,21 @@
 		<rosparam file="parameters/initial_position.yaml" command="load" />
 	</node>
 
-	
-	<node name="joint_gui" pkg="joint_state_publisher_experimental" type="joint_state_publisher" ></node>
-	<node name="jointState2tf" pkg="robot_state_publisher" type="state_publisher"/>
-  
+    
+	<node name="joint_gui" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+    <node name="jointState2tf" pkg="robot_state_publisher" type="state_publisher">
+        <remap from="joint_states" to="/allegroHand/joint_states"/>
+    </node>
+
     <!-- for Fuerte -->
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find allegro_hand_description)/allegro_hand_config.vcg" unless="$(arg GROOVY)"/>
     <!-- for Groovy -->  
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find allegro_hand_description)/allegro_hand_config.rviz" if="$(arg GROOVY)"/>    
-	
+    
+    <!--
 	<node name="keyboard" pkg="allegro_hand_keyboard" type="allegro_hand_keyboard" output="screen"></node>
-	
+    -->
+
 	<!--
 	<node pkg="rxtools" type="rxplot" name="plot_speed" 
 	args="/allegroHand/joint_desired_states/position[9],/allegroHand/joint_current_states/position[9]
