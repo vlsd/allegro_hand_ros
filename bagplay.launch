@@ -22,7 +22,7 @@
 	<!-- This launch file is set up for ROS FUERTE by default. If you are using GROOVY, please set this param to 'true'.-->
 	<arg name="GROOVY" default="true"/>
 
-    <node pkg="rosbag" type="play" name="rosbag" args="/home/vlad/allegro_ws/allegro_hand_ros/bagfiles/jointcmd2.bag"/>
+    <node pkg="rosbag" type="play" name="rosbag" args="/home/vlad/allegro_ws/allegro_hand_ros/bagfiles/showoff.bag"/>
 
 
 	<node name="jointState2tf" pkg="robot_state_publisher" type="state_publisher">
