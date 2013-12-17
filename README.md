@@ -16,6 +16,15 @@ ROS specific information can be found on the [ROS wiki](http://www.ros.org/wiki/
 
 **Note:** If controlling multiple allegro hands at once, please see the appropriate section below.
 
+Install
+-------
+
+This fork was tested on *groovy* in a rosbuild workspace on top of a catkin workspace. For details on how to
+set this up see this [ROS tutorial](http://wiki.ros.org/catkin/Tutorials/using_rosbuild_with_catkin).<br>
+We also need the development version of the *robot_model* stacks/packages, which can be obtained from
+the appropiate [github repo](https://github.com/ros/robot_model/tree/groovy-devel). Make sure you pull the
+*groovy-devel* branch (default is *hydro-devel*). The *visualization* folder needs to be moved to
+a place in your *$ROS_PACKAGE_PATH* (e.g. *~/catkin_ws/install/stacks/*).
 
 Contents
 --------
@@ -51,6 +60,7 @@ Launchers
   * **allegro_hand_noRviz.launch:** Launches Allegro Hand with specified controller (default = grasp). Also launches keyboard controller and DOES NOT launch rviz visualizer.  
   * **allegro_hand_joint_gui.launch:** Launches Allegro Hand with PD controller by defauly. Also launches a GUI interface for controlling each joint within its limits and rviz visualizer.
   * **allegro_hand_joint_gui_virtual.launch:** Launches Allegro Hand kinematic model. Also launches a GUI interface for controlling each joint within its limits and rviz visualizer.
+  * **sliders.launch** Almost identical to **allegro_hand_joint_gui.launch** with some localized options enabled
   
 **Note:** All launch files (including virtual and actual hand) have the following arguments that can be specified:
       
